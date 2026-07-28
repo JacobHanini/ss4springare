@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt — 4 Springare Schackklubben</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ivory:      #F2EEE4;
+    --walnut:     #2B2019;
+    --walnut-70:  #5A4C40;
+    --board-light:#EADFC8;
+    --board-dark: #8A6440;
+    --felt:       #2F473C;
+    --felt-dark:  #21332B;
+    --brass:      #A9803F;
+    --line:       #D9CFBC;
+    --card-bg:    #FBF9F3;
+
+    --display: "Fraunces", Georgia, serif;
+    --body:    "Inter", -apple-system, sans-serif;
+    --mono:    "IBM Plex Mono", monospace;
+
+    --radius: 3px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--ivory);
+    color:var(--walnut);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  :focus-visible{ outline:2px solid var(--felt); outline-offset:3px; }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  .board-rule{
+    display:flex;
+    width:100%;
+    height:10px;
+  }
+  .board-rule span{ flex:1 1 0; }
+  .board-rule span:nth-child(odd){ background:var(--board-light); }
+  .board-rule span:nth-child(even){ background:var(--board-dark); }
+
+  header{
+    background:var(--ivory);
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 28px;
+    gap:24px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .brand-mark{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--felt);
+    color:var(--ivory);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--display);
+    font-size:20px;
+    flex-shrink:0;
+  }
+  .brand-name{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:20px;
+    letter-spacing:0.01em;
+    color:var(--walnut);
+  }
+  .brand-name span{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:0.08em;
+    color:var(--walnut-70);
+    text-transform:uppercase;
+    margin-top:1px;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:30px;
+    margin:0;
+    padding:0;
+  }
+  nav a{
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--walnut-70);
+    padding:6px 0;
+    border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav a:hover, nav a.active{
+    color:var(--felt);
+    border-bottom-color:var(--felt);
+  }
+
+  .hero{
+    padding:72px 0 56px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    color:var(--felt);
+    background:#E4EBE5;
+    border:1px solid #CBDACC;
+    padding:5px 10px;
+    border-radius:var(--radius);
+    margin-bottom:22px;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(34px, 4.4vw, 52px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 20px;
+    color:var(--walnut);
+  }
+  .hero p.lead{
+    font-size:17px;
+    color:var(--walnut-70);
+    max-width:56ch;
+    margin:0;
+  }
+
+  .contact{
+    padding:52px 0 72px;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+
+  .contact-cards{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .contact-card{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:22px 24px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .contact-card:hover{ border-color:var(--brass); transform:translateY(-2px); }
+  .contact-card .piece{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--felt);
+    color:var(--ivory);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--display);
+    font-size:20px;
+    flex-shrink:0;
+  }
+  .contact-card .role{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.05em;
+    color:var(--brass);
+    margin-bottom:6px;
+    text-transform:uppercase;
+  }
+  .contact-card h3{
+    font-family:var(--display);
+    font-size:18px;
+    font-weight:600;
+    margin:0 0 6px;
+    color:var(--walnut);
+  }
+  .contact-card a.mail{
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--felt);
+    border-bottom:1px solid var(--felt);
+    padding-bottom:1px;
+  }
+
+  .info-card{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:32px;
+  }
+  .info-card h2{
+    font-family:var(--display);
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 16px;
+    color:var(--walnut);
+  }
+  .info-card p{
+    color:var(--walnut-70);
+    font-size:15px;
+    margin:0 0 26px;
+  }
+
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  form label{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--walnut-70);
+    margin-bottom:6px;
+    display:block;
+  }
+  form input,
+  form textarea{
+    width:100%;
+    background:var(--ivory);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    color:var(--walnut);
+    padding:12px 14px;
+    font-family:var(--body);
+    font-size:14.5px;
+  }
+  form input:focus,
+  form textarea:focus{
+    outline:none;
+    border-color:var(--felt);
+  }
+  .btn{
+    display:inline-block;
+    padding:13px 22px;
+    border-radius:var(--radius);
+    font-size:14.5px;
+    font-weight:600;
+    transition:transform .12s ease, background .15s ease;
+    border:1px solid var(--felt);
+    background:var(--felt);
+    color:var(--ivory);
+    cursor:pointer;
+    align-self:flex-start;
+  }
+  .btn:hover{ background:var(--felt-dark); transform:translateY(-1px); }
+
+  footer{
+    background:var(--felt-dark);
+    color:#D9E2DC;
+    padding:52px 0 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:36px;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .footer-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .footer-brand .brand-mark{ background:var(--brass); }
+  .footer-brand .brand-name{ color:#F2EEE4; }
+  footer p{
+    color:#AEBDB4;
+    font-size:14px;
+    max-width:36ch;
+    margin:0;
+  }
+  footer h4{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#8FA398;
+    margin:0 0 14px;
+  }
+  footer ul{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  footer a{
+    font-size:14.5px;
+    color:#D9E2DC;
+  }
+  footer a:hover{ color:var(--brass); }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:22px;
+    font-size:13px;
+    color:#7E9186;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  @media (max-width: 860px){
+    .contact-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; gap:28px; }
+    nav ul{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner wrap" style="padding-left:0;padding-right:0;">
+    <a class="brand" href="index.html#top">
+      <span class="brand-mark">♞</span>
+      <span class="brand-name">4 Springare<span>Schackklubb</span></span>
+    </a>
+    <nav aria-label="Huvudmeny">
+      <ul>
+        <li><a href="index.html#top">Hem</a></li>
+        <li><a href="schema.html">Schema</a></li>
+        <li><a href="omoss.html">Om oss</a></li>
+        <li><a href="nyhter.html">Nyheter</a></li>
+        <li><a href="kontakt.html" class="active">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="board-rule" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Hör av dig</span>
+      <h1>Kontakta 4 Springare</h1>
+      <p class="lead">Har du frågor om klubben, medlemskap eller en klubbkväll du vill veta mer om? Vi svarar gärna — hör av dig till oss nedan.</p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="wrap contact-grid">
+
+      <div class="contact-cards">
+        <div class="contact-card">
+          <span class="piece">♔</span>
+          <div>
+            <div class="role">Ordförande</div>
+            <h3>Vladimir Poley</h3>
+            <a class="mail" href="mailto:poleychess@hotmail.com">poleychess@hotmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <span class="piece">♞</span>
+          <div>
+            <div class="role">Webmaster</div>
+            <h3>Jacob Hanini</h3>
+            <a class="mail" href="mailto:jacob273a@gmail.com">jacob273a@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h2>Skicka ett meddelande</h2>
+        <p>Kom förbi en klubbkväll — brädena står redan uppdukade. Alla åldrar och nivåer är välkomna, från nybörjare till mästare.</p>
+        <form>
+          <div>
+            <label for="namn">Namn</label>
+            <input id="namn" type="text" placeholder="Ditt namn">
+          </div>
+          <div>
+            <label for="epost">E-post</label>
+            <input id="epost" type="email" placeholder="din@epost.se">
+          </div>
+          <div>
+            <label for="meddelande">Meddelande</label>
+            <textarea id="meddelande" rows="4" placeholder="Skriv ditt meddelande här..."></textarea>
+          </div>
+          <button class="btn" type="submit">Skicka meddelande</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="kontakt">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark">♞</span>
+          <span class="brand-name">4 Springare</span>
+        </div>
+        <p>Schackklubben för alla åldrar och nivåer. Kom förbi en klubbkväll — brädena står redan uppdukade.</p>
+      </div>
+      <div>
+        <h4>Klubben</h4>
+        <ul>
+          <li><a href="schema.html">Schema</a></li>
+          <li><a href="omoss.html">Om oss</a></li>
+          <li><a href="#">Fotogalleri</a></li>
+          <li><a href="omoss.html#bli-medlem">Bli en 4 Springare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:poleychess@hotmail.com">Vladimir Poley (Ordförande)</a></li>
+          <li><a href="mailto:jacob273a@gmail.com">Jacob Hanini (Webmaster)</a></li>
+          <li><a href="#">Hitta till klubblokalen</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 4 Springare Schackklubb</span>
+      <span>Ansvarig utgivare Jacob Hanini</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
