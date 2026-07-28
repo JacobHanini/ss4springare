@@ -241,6 +241,17 @@
     margin:0 0 26px;
   }
 
+  .map-frame{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    line-height:0;
+  }
+  .map-frame iframe{
+    display:block;
+    filter:grayscale(0.15) contrast(1.02);
+  }
+
   form{
     display:flex;
     flex-direction:column;
@@ -411,23 +422,20 @@
       </div>
 
       <div class="info-card">
-        <h2>Skicka ett meddelande</h2>
-        <p>Kom förbi en klubbkväll — brädena står redan uppdukade. Alla åldrar och nivåer är välkomna, från nybörjare till mästare.</p>
-        <form>
-          <div>
-            <label for="namn">Namn</label>
-            <input id="namn" type="text" placeholder="Ditt namn">
-          </div>
-          <div>
-            <label for="epost">E-post</label>
-            <input id="epost" type="email" placeholder="din@epost.se">
-          </div>
-          <div>
-            <label for="meddelande">Meddelande</label>
-            <textarea id="meddelande" rows="4" placeholder="Skriv ditt meddelande här..."></textarea>
-          </div>
-          <button class="btn" type="submit">Skicka meddelande</button>
-        </form>
+        <h2>Hitta till klubblokalen</h2>
+        <p>Surbrunnsgatan 42 — kom förbi en klubbkväll, brädena står redan uppdukade. Alla åldrar och nivåer är välkomna, från nybörjare till mästare.</p>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=Surbrunnsgatan+42&output=embed"
+            width="100%"
+            height="360"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Karta till Surbrunnsgatan 42">
+          </iframe>
+        </div>
       </div>
 
     </div>
